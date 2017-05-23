@@ -1,12 +1,23 @@
 import { TestBed, async } from '@angular/core/testing';
 
+import { Component } from '@angular/core';
+
 import { AppComponent } from './app.component';
+
+@Component({
+  selector: 'app-user-list',
+  template: ''
+})
+
+class MockUserListComponent {
+}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        MockUserListComponent
       ],
     }).compileComponents();
   }));
