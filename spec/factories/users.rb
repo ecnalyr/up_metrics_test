@@ -19,4 +19,12 @@ FactoryGirl.define do
       FactoryGirl.create_list(:sports_interest, evaluator.sports_interests_count, user: user)
     end
   end
+
+  trait :with_public_profile do
+    first_name 'John'
+    last_name 'Doe'
+    height_inches 72
+    weight_pounds 185
+    private_profile false
+  end
 end
