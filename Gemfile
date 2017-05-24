@@ -41,6 +41,7 @@ group :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails'
   gem 'selenium-webdriver', '~> 3.0.5'
+  gem 'shoulda-matchers', '~> 3.0'
 end
 
 group :development do

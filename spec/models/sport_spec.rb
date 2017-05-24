@@ -5,24 +5,8 @@ RSpec.describe Sport, type: :model do
     @sport = FactoryGirl.create(:sport)
   end
 
-  describe 'name' do
-    it 'should be present' do
-      @sport.name = nil
-      expect(@sport).not_to be_valid
-    end
+  it { should validate_presence_of(:name) }
+  it { should validate_uniqueness_of(:name) }
 
-    context 'not unique' do
-      it 'should not be valid' do
-        non_unique_sport = @sport.dup
-        expect(non_unique_sport).not_to be_valid
-      end
-    end
-  end
-
-  describe 'icon' do
-    it 'should be present' do
-      @sport.icon = nil
-      expect(@sport).not_to be_valid
-    end
-  end
+  it { should validate_presence_of(:icon) }
 end
