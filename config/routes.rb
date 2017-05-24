@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     resources :organizations
+    resources :participations
     resources :sports
     resources :sports_interests
     resources :teams
