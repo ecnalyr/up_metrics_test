@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :organizations
     resources :sports
     resources :sports_interests
+    resources :teams
     resources :users do
       member do
         resources :sports_interests
