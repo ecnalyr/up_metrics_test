@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'User Sport Interests', :type => :request do
+RSpec.describe 'User Views User Profile', :type => :request do
   before do
     @user = FactoryGirl.create(:user, :with_public_profile)
   end
