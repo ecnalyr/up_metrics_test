@@ -3,7 +3,13 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    @teams = Team.all
+    set_user
+
+    if @user
+      @teams = @user.teams
+    else
+      @teams = Team.all
+    end
 
     render json: @teams
   end
@@ -42,6 +48,13 @@ class TeamsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_team
       @team = Team.find(params[:id])
+    end
+
+    # Set user from user member route
+    def set_user
+      if params[:id]
+        @user = User.find(params[:id])
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

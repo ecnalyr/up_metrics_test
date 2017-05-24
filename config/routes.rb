@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :users do
       member do
         resources :sports_interests
+        resources :teams
       end
     end
   end

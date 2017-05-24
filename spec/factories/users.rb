@@ -27,4 +27,14 @@ FactoryGirl.define do
     weight_pounds 185
     private_profile false
   end
+
+  trait :with_teams do
+    transient do
+      teams_count 2
+    end
+
+    after(:create) do |user, evaluator|
+      FactoryGirl.create_list(:team, evaluator.teams_count, users: [user])
+    end
+  end
 end
