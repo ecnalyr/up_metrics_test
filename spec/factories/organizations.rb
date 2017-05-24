@@ -3,5 +3,15 @@ FactoryGirl.define do
     sequence :name do |n|
       "organization#{n}"
     end
+
+    trait :with_teams do
+      transient do
+        teams_count 2
+      end
+
+      after(:create) do |organization, evaluator|
+        FactoryGirl.create_list(:team, evaluator.teams_count, organization: organization)
+      end
+    end
   end
 end

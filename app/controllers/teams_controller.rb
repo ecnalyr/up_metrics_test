@@ -3,10 +3,10 @@ class TeamsController < ApplicationController
 
   # GET /teams
   def index
-    set_user
+    set_associated_object
 
-    if @user
-      @teams = @user.teams
+    if @associated_object
+      @teams = @associated_object.teams
     else
       @teams = Team.all
     end
@@ -51,9 +51,18 @@ class TeamsController < ApplicationController
     end
 
     # Set user from user member route
-    def set_user
+    def set_associated_object
       if params[:id]
-        @user = User.find(params[:id])
+        @associated_object = associated_class_derived_from_path.find(params[:id])
+      end
+    end
+
+    def associated_class_derived_from_path
+      # This is silly and prone to problems, but works for our tested scenarios
+      if request.fullpath.include?('/user')
+        User
+      else
+        Organization
       end
     end
 

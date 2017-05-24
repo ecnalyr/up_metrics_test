@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   scope '/api' do
-    resources :organizations
+    resources :organizations do
+      member do
+        resources :teams
+      end
+    end
+
     resources :participations
     resources :sports
     resources :sports_interests
