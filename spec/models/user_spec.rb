@@ -10,4 +10,5 @@ RSpec.describe User, type: :model do
 
   it { should have_many(:sports_interests) }
   it { should have_and_belong_to_many(:teams) }
+  it { should have_many(:participations) }
 end

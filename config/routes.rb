@@ -8,13 +8,18 @@ Rails.application.routes.draw do
     resources :teams
     resources :users do
       member do
+        resources :participations
         resources :sports_interests
         resources :teams
       end
     end
 
     scope '/consumer' do
-      resources :users
+      resources :users do
+        member do
+          resources :participations
+        end
+      end
     end
   end
 end

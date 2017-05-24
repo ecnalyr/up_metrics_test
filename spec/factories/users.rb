@@ -45,4 +45,18 @@ FactoryGirl.define do
       FactoryGirl.create_list(:team, evaluator.teams_count, users: [user])
     end
   end
+
+  trait :with_recent_participation do
+    # Within the last 2 weeks
+    after(:create) do |user, evaluator|
+      FactoryGirl.create(:participation, user: user, date: 1.week.ago)
+    end
+  end
+
+  trait :with_old_participation do
+    # Prior to 2 weeks ago
+    after(:create) do |user, evaluator|
+      FactoryGirl.create(:participation, user: user, date: 1.month.ago)
+    end
+  end
 end
