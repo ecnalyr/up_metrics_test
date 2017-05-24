@@ -47,14 +47,14 @@ FactoryGirl.define do
   end
 
   trait :with_recent_participation do
-    # Within the last 2 weeks
+    # Within the last week
     after(:create) do |user, evaluator|
-      FactoryGirl.create(:participation, :with_duration, user: user, date: 1.week.ago)
+      FactoryGirl.create(:participation, :with_duration, user: user, date: 1.day.ago)
     end
   end
 
   trait :with_old_participation do
-    # Prior to 2 weeks ago
+    # Prior to 1 week ago
     after(:create) do |user, evaluator|
       FactoryGirl.create(:participation, :with_duration, user: user, date: 1.month.ago)
     end
