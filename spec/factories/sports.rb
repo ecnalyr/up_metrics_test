@@ -1,6 +1,8 @@
 FactoryGirl.define do
   factory :sport do
-    name "MyString"
-    icon "MyString"
+    sequence :name do |n|
+      "sport#{n}"
+    end
+    icon 'icon_url'
   end
 end

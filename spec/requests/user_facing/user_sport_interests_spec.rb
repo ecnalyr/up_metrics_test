@@ -1,16 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe 'User Sport Interests', :type => :request do
-  @user = FactoryGirl.create(:user, :with_sports_interests)
+  before do
+    @user1 = FactoryGirl.create(:user, :with_sports_interests, sports_interests_count: 2)
+    @user2 = FactoryGirl.create(:user, :with_sports_interests, sports_interests_count: 2)
+  end
 
   it 'lists all sports interests for a user' do
-    get '/users/sports_interests'
+    get "/api/users/#{@user1.id}/sports_interests"
 
-    # make sure things are working as expected
     expect(response.content_type).to eq('application/json')
-    expect(response).to have_http_status(:created)
+    expect(response).to have_http_status(:success)
 
-    # check that response has the appropriate content
-    expect(response.body).to include("several sports")
+    expect(JSON.parse(response.body).count).to eq(2)
+    expect(JSON.parse(response.body).first['sport']['icon']).to include('icon_url')
+    expect(JSON.parse(response.body).first['sport']['name']).to include('sport')
   end
 end
