@@ -13,5 +13,8 @@ RSpec.describe 'Consumer Views User Participation', :type => :request do
     expect(response).to have_http_status(:success)
 
     expect(JSON.parse(response.body).count).to eq(1)
+    expect(JSON.parse(response.body).first['duration_minutes']).to eq(10)
+    expect(JSON.parse(response.body).first['date']).to be_present
+    expect(JSON.parse(response.body).first['sport']).to be_present
   end
 end
