@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe 'User Views User Profile', :type => :request do
+RSpec.describe 'Consumer Views User Profile', :type => :request do
   before do
-    @user = FactoryGirl.create(:user, :with_public_profile)
+    @public_user = FactoryGirl.create(:user, :with_public_profile)
     @private_user = FactoryGirl.create(:user, :with_private_profile)
   end
 
-  it 'lists profile information for a user' do
-    get "/api/users/#{@user.id}"
+  it 'lists public profile information for a user' do
+    get "/api/consumer/users/#{@public_user.id}"
 
     expect(response.content_type).to eq('application/json')
     expect(response).to have_http_status(:success)
@@ -20,18 +20,17 @@ RSpec.describe 'User Views User Profile', :type => :request do
     expect(JSON.parse(response.body)['private_profile']).to eq(false)
   end
 
-  it 'lists profile information for a user even if their profile is private' do
-    # The user should always be able to see their own profile
-    get "/api/users/#{@private_user.id}"
+  it 'does not list profile information for a private user' do
+    get "/api/consumer/users/#{@private_user.id}"
 
     expect(response.content_type).to eq('application/json')
     expect(response).to have_http_status(:success)
 
-    expect(JSON.parse(response.body)['email']).to include('@example.com')
-    expect(JSON.parse(response.body)['first_name']).to eq('Jane')
-    expect(JSON.parse(response.body)['last_name']).to eq('Doe')
-    expect(JSON.parse(response.body)['height_inches']).to eq(60)
-    expect(JSON.parse(response.body)['weight_pounds']).to eq(150)
+    expect(JSON.parse(response.body)['email']).to eq(nil)
+    expect(JSON.parse(response.body)['first_name']).to eq(nil)
+    expect(JSON.parse(response.body)['last_name']).to eq(nil)
+    expect(JSON.parse(response.body)['height_inches']).to eq(nil)
+    expect(JSON.parse(response.body)['weight_pounds']).to eq(nil)
     expect(JSON.parse(response.body)['private_profile']).to eq(true)
   end
 end

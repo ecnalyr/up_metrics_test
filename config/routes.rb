@@ -11,5 +11,9 @@ Rails.application.routes.draw do
         resources :teams
       end
     end
+
+    scope '/consumer' do
+      resources :users
+    end
   end
 end

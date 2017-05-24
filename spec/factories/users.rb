@@ -28,6 +28,14 @@ FactoryGirl.define do
     private_profile false
   end
 
+  trait :with_private_profile do
+    first_name 'Jane'
+    last_name 'Doe'
+    height_inches 60
+    weight_pounds 150
+    private_profile true
+  end
+
   trait :with_teams do
     transient do
       teams_count 2
