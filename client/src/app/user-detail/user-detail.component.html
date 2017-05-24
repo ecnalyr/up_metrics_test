@@ -1,0 +1,13 @@
+<div *ngIf="user">
+  <h2>{{user.email}} details!</h2>
+  <ul>
+    <li>id: {{user.id}} </li>
+    <li>email: {{user.email}} </li>
+    <li>first_name: {{user.first_name}} </li>
+    <li>last_name: {{user.last_name}} </li>
+    <li>height_inches: {{user.height_inches}} </li>
+    <li>weight_pounds: {{user.weight_pounds}} </li>
+    <li>private: {{user.private}} </li>
+  </ul>
+  <button (click)="goBack()">Back</button>
+</div>

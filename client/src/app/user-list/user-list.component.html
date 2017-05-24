@@ -1,3 +1,9 @@
-<ul>
-  <li *ngFor="let user of users">{{ user.email }}</li>
+<ul class="users">
+  <li class="user" *ngFor="let user of users" (click)="goToDetail(user)">
+    <span>{{user.email}}</span>
+  </li>
 </ul>
+
+<nav>
+  <a routerLink="/new-user">New User</a>
+</nav>

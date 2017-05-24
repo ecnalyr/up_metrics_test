@@ -2,6 +2,8 @@ import { TestBed, async } from '@angular/core/testing';
 
 import { Component } from '@angular/core';
 
+import { RouterTestingModule } from '@angular/router/testing';
+
 import { AppComponent } from './app.component';
 
 @Component({
@@ -19,6 +21,7 @@ describe('AppComponent', () => {
         AppComponent,
         MockUserListComponent
       ],
+      imports: [RouterTestingModule]
     }).compileComponents();
   }));
 
