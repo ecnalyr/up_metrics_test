@@ -57,6 +57,8 @@ The Rails API is not secured, so you can view json data by visiting a url, for e
 
 Rspec is used to test the API and integration between the Rails API and Angular.
 
+The Angular application [will be built (`ng build`) automatically before any feature/integration test](https://github.com/ecnalyr/up_metrics_test/blob/master/spec/rails_helper.rb#L71-L73).
+
 Karma is used to test the Angular app.
 
 
