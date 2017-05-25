@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, serializer: public_or_private_serializer
   end
 
   # POST /users
@@ -47,5 +47,13 @@ class UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name, :height_inches, :weight_pounds, :private_profile)
+    end
+
+    def public_or_private_serializer
+      if request.fullpath.include?('/consumer') && @user.private_profile?
+        PrivateUserSerializer
+      else
+        UserSerializer
+      end
     end
 end

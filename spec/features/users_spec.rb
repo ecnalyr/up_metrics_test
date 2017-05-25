@@ -32,7 +32,7 @@ feature 'Users', js: true do
   end
 
   scenario 'edit user' do
-    pending
+    skip
     visit '/' # TODO: Change to a specific user's route
 
     fill_in 'First Name', with: 'Updated Name'

@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523182345) do
+ActiveRecord::Schema.define(version: 20170524203955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_organizations_on_name", unique: true, using: :btree
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.date     "date"
+    t.float    "duration_minutes"
+    t.integer  "user_id",          null: false
+    t.integer  "sport_id",         null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["sport_id"], name: "index_participations_on_sport_id", using: :btree
+    t.index ["user_id"], name: "index_participations_on_user_id", using: :btree
+  end
 
   create_table "sports", force: :cascade do |t|
     t.string   "name",       null: false
@@ -21,6 +39,30 @@ ActiveRecord::Schema.define(version: 20170523182345) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_sports_on_name", unique: true, using: :btree
+  end
+
+  create_table "sports_interests", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "sport_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sport_id"], name: "index_sports_interests_on_sport_id", using: :btree
+    t.index ["user_id"], name: "index_sports_interests_on_user_id", using: :btree
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name",            null: false
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["organization_id"], name: "index_teams_on_organization_id", using: :btree
+  end
+
+  create_table "teams_users", id: false, force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "user_id"
+    t.index ["team_id"], name: "index_teams_users_on_team_id", using: :btree
+    t.index ["user_id"], name: "index_teams_users_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -35,4 +77,9 @@ ActiveRecord::Schema.define(version: 20170523182345) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
   end
 
+  add_foreign_key "participations", "sports"
+  add_foreign_key "participations", "users"
+  add_foreign_key "sports_interests", "sports"
+  add_foreign_key "sports_interests", "users"
+  add_foreign_key "teams", "organizations"
 end
