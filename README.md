@@ -1,24 +1,77 @@
-# README
+# Setup
+This is a Rails app serving as an API back-end to an Angular front-end that lives in the `client` directory.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The database is PostgreSQL.
 
-Things you may want to cover:
+## Important versions:
+- Rails 5.0.X
+- Ruby 2.3
+- Angular 4 (Used Angular CLI 1.0.0)
 
-* Ruby version
+To run locally, you need to run both the Rails and Angular applications.
 
-* System dependencies
+### Install everything
 
-* Configuration
+From the root of the project directory:
 
-* Database creation
+```
+bundle install
+```
 
-* Database initialization
+From the `client` directory:
 
-* How to run the test suite
+```
+npm install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Set up your database:
 
-* Deployment instructions
 
-* ...
+```
+rails db:create
+rails db:migrate
+rails db:seed
+```
+
+### Start the Rails server:
+
+```
+rails s -p 3000
+```
+
+### Start the Angular app:
+
+From the `client` directory:
+
+```
+npm start -p 4200
+```
+
+### View it in the browser:
+
+http://localhost:4200/ will take you to the app's home page.
+
+The Rails API is not secured, so you can view json data by visiting a url, for example: http://0.0.0.0:3000/api/sports
+
+### Tests:
+
+Rspec is used to test the API and integration between the Rails API and Angular.
+
+Karma is used to test the Angular app.
+
+
+From the root of the project directory:
+
+```
+rspec
+```
+
+From the `client` directory:
+
+```
+ng test
+```
+
+* Note: As of this writing, some failures are included in the angular test coverage because I'm an Angular novice.
+
+***
